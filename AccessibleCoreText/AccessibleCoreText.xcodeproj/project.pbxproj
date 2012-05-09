@@ -1,0 +1,283 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		910E8A64151C41F600A2DBDB /* BPXLTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 910E8A63151C41F600A2DBDB /* BPXLTextView.m */; };
+		911A2BC8151BE71300DAC360 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 911A2BC7151BE71300DAC360 /* UIKit.framework */; };
+		911A2BCA151BE71300DAC360 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 911A2BC9151BE71300DAC360 /* Foundation.framework */; };
+		911A2BCC151BE71300DAC360 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 911A2BCB151BE71300DAC360 /* CoreGraphics.framework */; };
+		911A2BD2151BE71300DAC360 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 911A2BD0151BE71300DAC360 /* InfoPlist.strings */; };
+		911A2BD4151BE71300DAC360 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 911A2BD3151BE71300DAC360 /* main.m */; };
+		911A2BD8151BE71300DAC360 /* BPXLAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 911A2BD7151BE71300DAC360 /* BPXLAppDelegate.m */; };
+		911A2BE0151BE72F00DAC360 /* BPXLTextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 911A2BDF151BE72F00DAC360 /* BPXLTextViewController.m */; };
+		911A2BE2151BE78C00DAC360 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 911A2BE1151BE78C00DAC360 /* CoreText.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		910E8A62151C41F600A2DBDB /* BPXLTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPXLTextView.h; sourceTree = "<group>"; };
+		910E8A63151C41F600A2DBDB /* BPXLTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPXLTextView.m; sourceTree = "<group>"; };
+		911A2BC3151BE71300DAC360 /* AccessibleCoreText.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AccessibleCoreText.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		911A2BC7151BE71300DAC360 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		911A2BC9151BE71300DAC360 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		911A2BCB151BE71300DAC360 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		911A2BCF151BE71300DAC360 /* AccessibleCoreText-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AccessibleCoreText-Info.plist"; sourceTree = "<group>"; };
+		911A2BD1151BE71300DAC360 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		911A2BD3151BE71300DAC360 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		911A2BD5151BE71300DAC360 /* AccessibleCoreText-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AccessibleCoreText-Prefix.pch"; sourceTree = "<group>"; };
+		911A2BD6151BE71300DAC360 /* BPXLAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPXLAppDelegate.h; sourceTree = "<group>"; };
+		911A2BD7151BE71300DAC360 /* BPXLAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BPXLAppDelegate.m; sourceTree = "<group>"; };
+		911A2BDE151BE72F00DAC360 /* BPXLTextViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPXLTextViewController.h; sourceTree = "<group>"; };
+		911A2BDF151BE72F00DAC360 /* BPXLTextViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPXLTextViewController.m; sourceTree = "<group>"; };
+		911A2BE1151BE78C00DAC360 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		911A2BC0151BE71300DAC360 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				911A2BE2151BE78C00DAC360 /* CoreText.framework in Frameworks */,
+				911A2BC8151BE71300DAC360 /* UIKit.framework in Frameworks */,
+				911A2BCA151BE71300DAC360 /* Foundation.framework in Frameworks */,
+				911A2BCC151BE71300DAC360 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		911A2BB8151BE71300DAC360 = {
+			isa = PBXGroup;
+			children = (
+				911A2BCD151BE71300DAC360 /* AccessibleCoreText */,
+				911A2BC6151BE71300DAC360 /* Frameworks */,
+				911A2BC4151BE71300DAC360 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		911A2BC4151BE71300DAC360 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				911A2BC3151BE71300DAC360 /* AccessibleCoreText.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		911A2BC6151BE71300DAC360 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				911A2BE1151BE78C00DAC360 /* CoreText.framework */,
+				911A2BC7151BE71300DAC360 /* UIKit.framework */,
+				911A2BC9151BE71300DAC360 /* Foundation.framework */,
+				911A2BCB151BE71300DAC360 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		911A2BCD151BE71300DAC360 /* AccessibleCoreText */ = {
+			isa = PBXGroup;
+			children = (
+				911A2BD6151BE71300DAC360 /* BPXLAppDelegate.h */,
+				911A2BD7151BE71300DAC360 /* BPXLAppDelegate.m */,
+				911A2BDE151BE72F00DAC360 /* BPXLTextViewController.h */,
+				911A2BDF151BE72F00DAC360 /* BPXLTextViewController.m */,
+				910E8A62151C41F600A2DBDB /* BPXLTextView.h */,
+				910E8A63151C41F600A2DBDB /* BPXLTextView.m */,
+				911A2BCE151BE71300DAC360 /* Supporting Files */,
+			);
+			path = AccessibleCoreText;
+			sourceTree = "<group>";
+		};
+		911A2BCE151BE71300DAC360 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				911A2BCF151BE71300DAC360 /* AccessibleCoreText-Info.plist */,
+				911A2BD0151BE71300DAC360 /* InfoPlist.strings */,
+				911A2BD3151BE71300DAC360 /* main.m */,
+				911A2BD5151BE71300DAC360 /* AccessibleCoreText-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		911A2BC2151BE71300DAC360 /* AccessibleCoreText */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 911A2BDB151BE71300DAC360 /* Build configuration list for PBXNativeTarget "AccessibleCoreText" */;
+			buildPhases = (
+				911A2BBF151BE71300DAC360 /* Sources */,
+				911A2BC0151BE71300DAC360 /* Frameworks */,
+				911A2BC1151BE71300DAC360 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AccessibleCoreText;
+			productName = AccessibleCoreText;
+			productReference = 911A2BC3151BE71300DAC360 /* AccessibleCoreText.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		911A2BBA151BE71300DAC360 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = BPXL;
+				LastUpgradeCheck = 0430;
+			};
+			buildConfigurationList = 911A2BBD151BE71300DAC360 /* Build configuration list for PBXProject "AccessibleCoreText" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 911A2BB8151BE71300DAC360;
+			productRefGroup = 911A2BC4151BE71300DAC360 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				911A2BC2151BE71300DAC360 /* AccessibleCoreText */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		911A2BC1151BE71300DAC360 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				911A2BD2151BE71300DAC360 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		911A2BBF151BE71300DAC360 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				911A2BD4151BE71300DAC360 /* main.m in Sources */,
+				911A2BD8151BE71300DAC360 /* BPXLAppDelegate.m in Sources */,
+				911A2BE0151BE72F00DAC360 /* BPXLTextViewController.m in Sources */,
+				910E8A64151C41F600A2DBDB /* BPXLTextView.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		911A2BD0151BE71300DAC360 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				911A2BD1151BE71300DAC360 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		911A2BD9151BE71300DAC360 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Debug;
+		};
+		911A2BDA151BE71300DAC360 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		911A2BDC151BE71300DAC360 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "AccessibleCoreText/AccessibleCoreText-Prefix.pch";
+				INFOPLIST_FILE = "AccessibleCoreText/AccessibleCoreText-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		911A2BDD151BE71300DAC360 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "AccessibleCoreText/AccessibleCoreText-Prefix.pch";
+				INFOPLIST_FILE = "AccessibleCoreText/AccessibleCoreText-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		911A2BBD151BE71300DAC360 /* Build configuration list for PBXProject "AccessibleCoreText" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				911A2BD9151BE71300DAC360 /* Debug */,
+				911A2BDA151BE71300DAC360 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		911A2BDB151BE71300DAC360 /* Build configuration list for PBXNativeTarget "AccessibleCoreText" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				911A2BDC151BE71300DAC360 /* Debug */,
+				911A2BDD151BE71300DAC360 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 911A2BBA151BE71300DAC360 /* Project object */;
+}
