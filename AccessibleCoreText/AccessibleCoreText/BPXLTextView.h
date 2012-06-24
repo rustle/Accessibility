@@ -22,7 +22,7 @@
 
 @interface BPXLTextView : UIView
 
-@property (strong, nonatomic) NSAttributedString *attributedString;
-@property (assign, nonatomic) CGPoint textInset;
+@property (nonatomic) NSAttributedString *attributedString;
+@property (nonatomic) CGPoint textInset;
 
 @end

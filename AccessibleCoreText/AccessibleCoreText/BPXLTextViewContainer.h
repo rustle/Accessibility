@@ -1,5 +1,5 @@
 //
-//  BPXLAppDelegate.h
+//  BPXLTextViewContainer.h
 //  AccessibleCoreText
 //
 //  Created by Doug Russell on 3/22/12.
@@ -16,12 +16,11 @@
 //  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
-//  
+//	
 
 #import <UIKit/UIKit.h>
+#import "BPXLTextView.h"
 
-@interface BPXLAppDelegate : UIResponder <UIApplicationDelegate>
-
-@property (nonatomic) UIWindow *window;
+@interface BPXLTextViewContainer : BPXLTextView
 
 @end

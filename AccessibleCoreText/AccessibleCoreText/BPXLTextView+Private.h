@@ -1,5 +1,5 @@
 //
-//  BPXLAppDelegate.h
+//  BPXLTextView+Private.h
 //  AccessibleCoreText
 //
 //  Created by Doug Russell on 3/22/12.
@@ -16,12 +16,15 @@
 //  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
-//  
+//
 
-#import <UIKit/UIKit.h>
-
-@interface BPXLAppDelegate : UIResponder <UIApplicationDelegate>
-
-@property (nonatomic) UIWindow *window;
-
+@interface BPXLTextView ()
+@property (nonatomic) UIBezierPath *path;
+@property (nonatomic) UIBezierPath *circlePath;
+- (void)configurePath;
+@property (nonatomic) __attribute__((NSObject)) CTFrameRef frameRef;
+- (void)drawTextWithFramesetter:(NSAttributedString *)attributedString rect:(CGRect)rect path:(CGPathRef)path context:(CGContextRef)context;
+@property (nonatomic) UIPanGestureRecognizer *pan;
+@property (nonatomic) CGPoint circleCenter;
+- (void)reset;
 @end

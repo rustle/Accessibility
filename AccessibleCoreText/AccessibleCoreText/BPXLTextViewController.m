@@ -20,42 +20,34 @@
 
 #import "BPXLTextViewController.h"
 #import "BPXLTextView.h"
+#import "BPXLTextViewContainer.h"
+#import "BPXLTextViewReadingContent.h"
 
 @interface BPXLTextViewController ()
-@property (strong, nonatomic) BPXLTextView *textView;
+@property (nonatomic) BPXLTextView *textView;
 @end
 
 @implementation BPXLTextViewController
-@synthesize textView=_textView;
 
 - (NSAttributedString *)loremIpsum
 {
-	NSString *loremIpsum = @"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit.\n\n";
-	
-	NSString *hugeString = loremIpsum;
-	if (YES) hugeString = [hugeString stringByAppendingString:loremIpsum];
-	if (YES) hugeString = [hugeString stringByAppendingString:loremIpsum];
+	NSString *loremIpsum = @"A screen reader is a software application that attempts to identify and interpret what is being displayed on the screen (or, more accurately, sent to standard output, whether a video monitor is present or not). This interpretation is then re-presented to the user with text-to-speech, sound icons, or a Braille output device. Screen readers are a form of assistive technology (AT) potentially useful to people who are blind, visually impaired, illiterate or learning disabled, often in combination with other AT, such as screen magnifiers.\nA person's choice of screen reader is dictated by many factors, including platform, cost (even to upgrade a screen reader can cost hundreds of U.S. dollars), and the role of organizations like charities, schools, and employers. Screen reader choice is contentious: differing priorities and strong preferences are common.[citation needed]\nMicrosoft Windows operating systems have included the Microsoft Narrator light-duty screen reader since Windows 2000. Apple Inc. Mac OS X includes VoiceOver, a feature-rich screen reader. The console-based Oralux Linux distribution ships with three screen-reading environments: Emacspeak, Yasr and Speakup. The open source GNOME desktop environment long included Gnopernicus and now includes Orca.\nThere are also open source screen readers, such as the Linux Screen Reader for GNOME and NonVisual Desktop Access for Windows.\nsource: http://en.wikipedia.org/wiki/Screen_reader";
 	
 	CTFontRef noteworthy24 = CTFontCreateWithName(CFSTR("Noteworthy"), 24, NULL);
 	NSDictionary *normalAttributes = [NSDictionary dictionaryWithObject:(__bridge id)noteworthy24 forKey:(id)kCTFontAttributeName];
 	CFRelease(noteworthy24);
 	
-	return [[NSAttributedString alloc] initWithString:hugeString attributes:normalAttributes];
+	return [[NSAttributedString alloc] initWithString:loremIpsum attributes:normalAttributes];
 }
 
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
 	
-	self.textView = [[BPXLTextView alloc] initWithFrame:self.view.bounds];
+	// Swap out the text view class to try out different behaviors
+	self.textView = [[BPXLTextViewReadingContent alloc] initWithFrame:self.view.bounds];
 	self.textView.attributedString = [self loremIpsum];
 	[self.view addSubview:self.textView];
-}
-
-- (void)viewDidUnload
-{
-	[super viewDidUnload];
-	self.textView = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
