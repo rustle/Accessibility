@@ -57,9 +57,7 @@
 - (CGRect)accessibilityFrameForLineNumber:(NSInteger)lineNumber
 {
 	[self configureAccessibilityElements];
-	// Line bounds needs to be in screen coordinates, so convert rect to window
-	CGRect lineBounds = [[self.accessibilityElements objectAtIndex:lineNumber] accessibilityFrame];
-	return lineBounds;
+	return [[self.accessibilityElements objectAtIndex:lineNumber] accessibilityFrame];
 }
 
 // Returns a string representing the text displayed on the current page.
