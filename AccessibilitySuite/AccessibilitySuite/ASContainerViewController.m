@@ -22,11 +22,10 @@
 #import "ASAccessibleImageView.h"
 
 @interface ASContainerViewController ()
-@property (strong, nonatomic) ASAccessibleImageView *imageView;
+@property (nonatomic) ASAccessibleImageView *imageView;
 @end
 
 @implementation ASContainerViewController
-@synthesize imageView=_imageView;
 
 #pragma mark - Init/Dealloc
 
@@ -59,12 +58,6 @@
 		[self.imageView addAccessibilityElement:@"Square" hint:@"Picture of a square" frame:CGRectMake(170.0f, 230.0f, 130.0f, 130.0f)];
 	}
 	[self.view addSubview:self.imageView];
-}
-
-- (void)viewDidUnload
-{
-	[super viewDidUnload];
-	self.imageView = nil;
 }
 
 @end

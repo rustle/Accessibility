@@ -25,7 +25,7 @@
 
 @implementation ASPageSlider
 
-- (void)commonInit
+static void CommonInit(ASPageSlider *self)
 {
 	[self updateAccessibilityValue];
 }
@@ -35,7 +35,7 @@
 	self = [super initWithCoder:aDecoder];
 	if (self)
 	{
-		[self commonInit];
+		CommonInit(self);
 	}
 	return self;
 }
@@ -45,7 +45,7 @@
 	self = [super initWithFrame:frame];
 	if (self)
 	{
-		[self commonInit];
+		CommonInit(self);
 	}
 	return self;
 }

@@ -33,9 +33,6 @@
 @end
 
 @implementation ASSegmentedControlViewController
-@synthesize segmentedControlText=_segmentedControlText;
-@synthesize segmentedControlImages=_segmentedControlImages;
-@synthesize segmentedControlAccessibleImages=_segmentedControlAccessibleImages;
 
 #pragma mark - Init/Dealloc
 
@@ -58,11 +55,4 @@
 	[self.segmentedControlAccessibleImages imageForSegmentAtIndex:1].accessibilityLabel = @"Right";
 }
 
-- (void)viewDidUnload 
-{
-	[super viewDidUnload];
-	self.segmentedControlText = nil;
-	self.segmentedControlImages = nil;
-	self.segmentedControlImages = nil;
-}
 @end

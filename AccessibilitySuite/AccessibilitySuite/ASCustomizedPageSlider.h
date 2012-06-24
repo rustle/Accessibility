@@ -23,8 +23,8 @@
 
 @interface ASCustomizedPageSlider : UIControl
 
-@property (assign, nonatomic) float value;
-@property (assign, nonatomic) float minValue;
-@property (assign, nonatomic) float maxValue;
+@property (nonatomic) float value;
+@property (nonatomic) float minValue;
+@property (nonatomic) float maxValue;
 
 @end

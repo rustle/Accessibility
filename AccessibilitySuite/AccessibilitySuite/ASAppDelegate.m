@@ -22,8 +22,6 @@
 #import "ASRootViewController.h"
 
 @implementation ASAppDelegate
-@synthesize window=_window;
-@synthesize navigationController=_navigationController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {

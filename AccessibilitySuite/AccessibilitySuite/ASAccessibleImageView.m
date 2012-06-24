@@ -18,52 +18,13 @@
 //  
 
 #import "ASAccessibleImageView.h"
-
-@interface ASAccessibilityElement : UIAccessibilityElement
-@property (assign, nonatomic) CGRect frameRelativeToContainer;
-@end
-
-@implementation ASAccessibilityElement
-@synthesize frameRelativeToContainer=_frameRelativeToContainer;
-@end
+#import "ASAccessibilityElement.h"
 
 @interface ASAccessibleImageView ()
-{
-	BOOL accessibilityElementsDirty;
-}
 @property (strong, nonatomic) NSMutableArray *accessibilityElements;
-- (void)updateAccessibilityFramesIfNeeded;
 @end
 
 @implementation ASAccessibleImageView
-@synthesize accessibilityElements=_accessibilityElements;
-
-#pragma mark - Init/Dealloc
-
-- (void)commonInit
-{
-	
-}
-
-- (id)initWithCoder:(NSCoder *)aDecoder
-{
-	self = [super initWithCoder:aDecoder];
-	if (self)
-	{
-		[self commonInit];
-	}
-	return self;
-}
-
-- (id)initWithFrame:(CGRect)frame
-{
-	self = [super initWithFrame:frame];
-	if (self)
-	{
-		[self commonInit];
-	}
-	return self;
-}
 
 #pragma mark - Accessors
 
@@ -85,19 +46,16 @@
 
 - (NSInteger)accessibilityElementCount
 {
-	[self updateAccessibilityFramesIfNeeded];
 	return self.accessibilityElements.count;
 }
 
 - (id)accessibilityElementAtIndex:(NSInteger)index
 {
-	[self updateAccessibilityFramesIfNeeded];
 	return [self.accessibilityElements objectAtIndex:index];
 }
 
 - (NSInteger)indexOfAccessibilityElement:(id)element
 {
-	[self updateAccessibilityFramesIfNeeded];
 	return [self.accessibilityElements indexOfObject:element];
 }
 
@@ -117,74 +75,12 @@
 		accElement.accessibilityHint = hint;
 		accElement.accessibilityTraits = UIAccessibilityTraitStaticText;
 		[self.accessibilityElements addObject:accElement];
-		[self markAccessibilityElementsDirty];
 	}
 }
 
 - (void)clearAccessibilityElements
 {
 	[self.accessibilityElements removeAllObjects];
-}
-
-- (void)markAccessibilityElementsDirty
-{
-	accessibilityElementsDirty = YES;
-}
-
-- (void)updateAccessibilityFramesIfNeeded
-{
-	if (!accessibilityElementsDirty)
-	{
-		return;
-	}
-	
-	UIWindow *window = [self window];
-	if (window == nil)
-	{
-		// If we don't have a window then we can't calculate our frames, so bail
-		return;
-	}
-	
-	for (ASAccessibilityElement *accElement in self.accessibilityElements)
-	{
-		// accessibilityFrames are in screen coordinates, so do some hoop jumping to convert
-		CGRect frame = accElement.frameRelativeToContainer;
-		frame = [self convertRect:frame toView:window];
-		frame = [window convertRect:frame toWindow:nil];
-		accElement.accessibilityFrame = frame;
-	}
-}
-
-// Changes in super view or geometry invalidate the current accessibilityFrames
-
-- (void)setFrame:(CGRect)frame
-{
-	[super setFrame:frame];
-	[self markAccessibilityElementsDirty];
-}
-
-- (void)setCenter:(CGPoint)center
-{
-	[super setCenter:center];
-	[self markAccessibilityElementsDirty];
-}
-
-- (void)setBounds:(CGRect)bounds
-{
-	[super setBounds:bounds];
-	[self markAccessibilityElementsDirty];
-}
-
-- (void)willMoveToWindow:(UIWindow *)newWindow
-{
-	[super willMoveToWindow:newWindow];
-	[self markAccessibilityElementsDirty];
-}
-
-- (void)willMoveToSuperview:(UIView *)newSuperview
-{
-	[super willMoveToSuperview:newSuperview];
-	[self markAccessibilityElementsDirty];
 }
 
 @end

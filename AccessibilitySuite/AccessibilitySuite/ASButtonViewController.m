@@ -21,22 +21,16 @@
 #import "ASButtonViewController.h"
 
 @interface ASButtonViewController () <UIScrollViewDelegate>
-@property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
-@property (strong, nonatomic) IBOutlet UIPageControl *pageControl;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (weak, nonatomic) IBOutlet UIPageControl *pageControl;
 - (IBAction)pageChanged:(UIPageControl *)sender;
-@property (strong, nonatomic) IBOutlet UIView *roundedRectButtonView;
-@property (strong, nonatomic) IBOutlet UIView *backgroundImageButtonView;
-@property (strong, nonatomic) IBOutlet UIView *bakedInTextImageButtonView;
-@property (strong, nonatomic) IBOutlet UIView *accessibleImageButtonView;
+@property (weak, nonatomic) IBOutlet UIView *roundedRectButtonView;
+@property (weak, nonatomic) IBOutlet UIView *backgroundImageButtonView;
+@property (weak, nonatomic) IBOutlet UIView *bakedInTextImageButtonView;
+@property (weak, nonatomic) IBOutlet UIView *accessibleImageButtonView;
 @end
 
 @implementation ASButtonViewController
-@synthesize scrollView=_scrollView;
-@synthesize pageControl=_pageControl;
-@synthesize roundedRectButtonView=_roundedRectButtonView;
-@synthesize backgroundImageButtonView=_backgroundImageButtonView;
-@synthesize bakedInTextImageButtonView=_bakedInTextImageButtonView;
-@synthesize accessibleImageButtonView=_accessibleImageButtonView;
 
 #pragma mark - Init/Dealloc
 
@@ -52,7 +46,7 @@
 
 - (void)dealloc
 {
-	self.scrollView.delegate = nil;
+	_scrollView.delegate = nil;
 }
 
 #pragma mark - View Life Cycle
@@ -75,18 +69,6 @@
 	panelRect.origin.x += panelRect.size.width;
 	self.accessibleImageButtonView.frame = panelRect;
 	[self.scrollView addSubview:self.accessibleImageButtonView];
-}
-
-- (void)viewDidUnload
-{
-	[super viewDidUnload];
-	self.scrollView.delegate = nil;
-	self.scrollView = nil;
-	self.pageControl = nil;
-	self.roundedRectButtonView = nil;
-	self.backgroundImageButtonView = nil;
-	self.bakedInTextImageButtonView = nil;
-	self.accessibleImageButtonView = nil;
 }
 
 #pragma mark - Page Control

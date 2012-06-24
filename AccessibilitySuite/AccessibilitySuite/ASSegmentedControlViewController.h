@@ -22,8 +22,8 @@
 
 @interface ASSegmentedControlViewController : ASViewController
 
-@property (strong, nonatomic) IBOutlet UISegmentedControl *segmentedControlText;
-@property (strong, nonatomic) IBOutlet UISegmentedControl *segmentedControlImages;
-@property (strong, nonatomic) IBOutlet UISegmentedControl *segmentedControlAccessibleImages;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControlText;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControlImages;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControlAccessibleImages;
 
 @end

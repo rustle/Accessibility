@@ -22,6 +22,6 @@
 
 @interface ASRootViewController : ASViewController <UITableViewDelegate, UITableViewDataSource>
 
-@property (strong, nonatomic) UITableView *tableView;
+@property (nonatomic) UITableView *tableView;
 
 @end

@@ -26,13 +26,12 @@
 @end
 
 @implementation ASCustomizedPageSlider
-@synthesize value=_value, minValue=_minValue, maxValue=_maxValue;
 
-- (void)commonInit
+static void CommonInit(ASCustomizedPageSlider *self)
 {
-	_value = 1.0f;
-	_minValue = 1.0f;
-	_maxValue = 20.0f;
+	self.value = 1.0f;
+	self.minValue = 1.0f;
+	self.maxValue = 20.0f;
 	[self updateAccessibilityValue];
 }
 
@@ -40,7 +39,9 @@
 {
 	self = [super initWithFrame:frame];
 	if (self)
-		[self commonInit];
+	{
+		CommonInit(self);
+	}
 	return self;
 }
 
@@ -48,7 +49,9 @@
 {
 	self = [super initWithCoder:aDecoder];
 	if (self)
-		[self commonInit];
+	{
+		CommonInit(self);
+	}
 	return self;
 }
 

@@ -38,6 +38,7 @@
 		918D3C0A152426320046188A /* Shapes~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 918D3C08152426320046188A /* Shapes~iphone.png */; };
 		918D3C0D15242ADA0046188A /* Shapes@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 918D3C0B15242ADA0046188A /* Shapes@2x~ipad.png */; };
 		918D3C0E15242ADA0046188A /* Shapes~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 918D3C0C15242ADA0046188A /* Shapes~ipad.png */; };
+		919C422D1597C0AD005B89B4 /* ASAccessibilityElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 919C422C1597C0AD005B89B4 /* ASAccessibilityElement.m */; };
 		91C1502615563FF100903E2C /* ASSliderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 91C1502515563FF100903E2C /* ASSliderViewController.m */; };
 		91C1502A1556405400903E2C /* ASCustomizedPageSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 91C150291556405400903E2C /* ASCustomizedPageSlider.m */; };
 		91C1502C1556413600903E2C /* ASSliderViewController~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 91C1502B1556413600903E2C /* ASSliderViewController~ipad.xib */; };
@@ -91,6 +92,8 @@
 		918D3C08152426320046188A /* Shapes~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Shapes~iphone.png"; sourceTree = "<group>"; };
 		918D3C0B15242ADA0046188A /* Shapes@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Shapes@2x~ipad.png"; sourceTree = "<group>"; };
 		918D3C0C15242ADA0046188A /* Shapes~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Shapes~ipad.png"; sourceTree = "<group>"; };
+		919C422B1597C0AD005B89B4 /* ASAccessibilityElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASAccessibilityElement.h; sourceTree = "<group>"; };
+		919C422C1597C0AD005B89B4 /* ASAccessibilityElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASAccessibilityElement.m; sourceTree = "<group>"; };
 		91C1502415563FF000903E2C /* ASSliderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASSliderViewController.h; sourceTree = "<group>"; };
 		91C1502515563FF100903E2C /* ASSliderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASSliderViewController.m; sourceTree = "<group>"; };
 		91C150281556405400903E2C /* ASCustomizedPageSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASCustomizedPageSlider.h; sourceTree = "<group>"; };
@@ -168,6 +171,8 @@
 				918D3BFC152420FE0046188A /* ASContainerViewController.m */,
 				918D3C04152423120046188A /* ASAccessibleImageView.h */,
 				918D3C05152423120046188A /* ASAccessibleImageView.m */,
+				919C422B1597C0AD005B89B4 /* ASAccessibilityElement.h */,
+				919C422C1597C0AD005B89B4 /* ASAccessibilityElement.m */,
 				91C1502415563FF000903E2C /* ASSliderViewController.h */,
 				91C1502515563FF100903E2C /* ASSliderViewController.m */,
 				91C1502B1556413600903E2C /* ASSliderViewController~ipad.xib */,
@@ -316,6 +321,7 @@
 				91C1502615563FF100903E2C /* ASSliderViewController.m in Sources */,
 				91C1502A1556405400903E2C /* ASCustomizedPageSlider.m in Sources */,
 				91C1503315564AF200903E2C /* ASPageSlider.m in Sources */,
+				919C422D1597C0AD005B89B4 /* ASAccessibilityElement.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

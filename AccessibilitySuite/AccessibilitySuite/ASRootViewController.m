@@ -61,14 +61,6 @@
 	[self.view addSubview:self.tableView];
 }
 
-- (void)viewDidUnload
-{
-	[super viewDidUnload];
-	self.tableView.delegate = nil;
-	self.tableView.dataSource = nil;
-	self.tableView = nil;
-}
-
 #pragma mark - Table View Data Source
 
 enum {

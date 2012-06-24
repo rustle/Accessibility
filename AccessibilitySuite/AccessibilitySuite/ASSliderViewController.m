@@ -22,16 +22,13 @@
 #import "ASCustomizedPageSlider.h"
 
 @interface ASSliderViewController ()
-@property (strong, nonatomic) IBOutlet UISlider *stockSlider;
-@property (strong, nonatomic) IBOutlet ASPageSlider *pageSlider;
-@property (strong, nonatomic) IBOutlet ASCustomizedPageSlider *customPageSlider;
+@property (weak, nonatomic) IBOutlet UISlider *stockSlider;
+@property (weak, nonatomic) IBOutlet ASPageSlider *pageSlider;
+@property (weak, nonatomic) IBOutlet ASCustomizedPageSlider *customPageSlider;
 - (IBAction)valueChanged:(id)sender;
 @end
 
 @implementation ASSliderViewController
-@synthesize stockSlider=_stockSlider;
-@synthesize pageSlider=_configuredSlider;
-@synthesize customPageSlider=_volumeSlider;
 
 #pragma mark - Init/Dealloc
 
@@ -43,16 +40,6 @@
 		self.title = @"Sliders";
 	}
 	return self;
-}
-
-#pragma mark - View Life Cycle
-
-- (void)viewDidUnload
-{
-	[super viewDidUnload];
-	self.stockSlider = nil;
-	self.pageSlider = nil;
-	self.customPageSlider = nil;
 }
 
 - (IBAction)valueChanged:(id)sender
