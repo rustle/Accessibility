@@ -19,12 +19,17 @@
 //
 
 #import "BPXLTextViewContainer.h"
-#import "BPXLTextView+Private.h"
-#import "BPXLTextViewContainer+Private.h"
+#import "BPXLTextView_Internal.h"
+
+@interface BPXLTextViewContainer ()
+@property (nonatomic) NSMutableArray *accessibilityElements;
+- (void)resetAccessibilityElements;
+- (void)configureAccessibilityElements;
+@end
 
 @implementation BPXLTextViewContainer
 
-#pragma mark - 
+#pragma mark - Reset
 
 - (void)reset
 {
@@ -61,7 +66,7 @@
 	{
 		// If we don't have a frame ref, we don't have any lines
 		if (self.frameRef == NULL)
-			return;
+			[self makeFrameWithAttributeString:self.attributedString path:self.path.CGPath];
 		UIWindow *window = self.window;
 		if (window == nil)
 			return;
@@ -148,65 +153,6 @@
 {
 	[self configureAccessibilityElements];
 	return [self.accessibilityElements indexOfObject:element];
-}
-
-#pragma mark - Accessibility Scroll
-
-/*
- If the user interface requires a scrolling action (e.g. turning the page of a book), a view in the view 
- hierarchy should implement the following method. The return result indicates whether the action 
- succeeded for that direction. If the action failed, the method will be called on a view higher 
- in the hierarchy. If the action succeeds, UIAccessibilityPageScrolledNotification must be posted after
- the scrolling completes.
- default == NO
- */
-- (BOOL)accessibilityScroll:(UIAccessibilityScrollDirection)direction
-{
-	self.path = nil;
-	self.circlePath = nil;
-	BOOL handled = NO;
-	switch (direction) {
-		case UIAccessibilityScrollDirectionDown:
-			if (self.circleCenter.y > 100.0f)
-			{
-				self.circleCenter = CGPointMake(self.circleCenter.x, self.circleCenter.y - 100.0f);
-				handled = YES;
-			}
-			break;
-		case UIAccessibilityScrollDirectionUp:
-			if (self.circleCenter.y < self.bounds.size.height - 100.0f)
-			{
-				self.circleCenter = CGPointMake(self.circleCenter.x, self.circleCenter.y + 100.0f);
-				handled = YES;
-			}
-			break;
-		case UIAccessibilityScrollDirectionLeft:
-			if (self.circleCenter.x > 100.0f)
-			{
-				self.circleCenter = CGPointMake(self.circleCenter.x - 100.0f, self.circleCenter.y);
-				handled = YES;
-			}
-			break;
-		case UIAccessibilityScrollDirectionRight:
-			if (self.circleCenter.x < self.bounds.size.width - 100.0f)
-			{
-				self.circleCenter = CGPointMake(self.circleCenter.x + 100.0f, self.circleCenter.y);
-				handled = YES;
-			}
-			break;
-		case UIAccessibilityScrollDirectionNext:
-		case UIAccessibilityScrollDirectionPrevious:
-			// If this code had more than one page, this is how you'd know to go to the next page
-			break;
-		default:
-			break;
-	}
-	if (handled)
-	{
-		UIAccessibilityPostNotification(UIAccessibilityPageScrolledNotification, [NSString stringWithFormat:@"The circle is now centered at %d by %d", (int)self.circleCenter.x, (int)self.circleCenter.y]);
-		[self setNeedsDisplay];
-	}
-	return handled;
 }
 
 @end

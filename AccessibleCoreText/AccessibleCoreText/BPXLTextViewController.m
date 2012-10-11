@@ -23,21 +23,21 @@
 #import "BPXLTextViewContainer.h"
 #import "BPXLTextViewReadingContent.h"
 
+#define READINGCONTENT 1
+
 @interface BPXLTextViewController ()
 @property (nonatomic) BPXLTextView *textView;
 @end
 
 @implementation BPXLTextViewController
 
-- (NSAttributedString *)loremIpsum
+#pragma mark - View Controller Life Cycle
+
++ (instancetype)newWithText:(NSAttributedString *)text
 {
-	NSString *loremIpsum = @"A screen reader is a software application that attempts to identify and interpret what is being displayed on the screen (or, more accurately, sent to standard output, whether a video monitor is present or not). This interpretation is then re-presented to the user with text-to-speech, sound icons, or a Braille output device. Screen readers are a form of assistive technology (AT) potentially useful to people who are blind, visually impaired, illiterate or learning disabled, often in combination with other AT, such as screen magnifiers.\nA person's choice of screen reader is dictated by many factors, including platform, cost (even to upgrade a screen reader can cost hundreds of U.S. dollars), and the role of organizations like charities, schools, and employers. Screen reader choice is contentious: differing priorities and strong preferences are common.[citation needed]\nMicrosoft Windows operating systems have included the Microsoft Narrator light-duty screen reader since Windows 2000. Apple Inc. Mac OS X includes VoiceOver, a feature-rich screen reader. The console-based Oralux Linux distribution ships with three screen-reading environments: Emacspeak, Yasr and Speakup. The open source GNOME desktop environment long included Gnopernicus and now includes Orca.\nThere are also open source screen readers, such as the Linux Screen Reader for GNOME and NonVisual Desktop Access for Windows.\nsource: http://en.wikipedia.org/wiki/Screen_reader";
-	
-	CTFontRef noteworthy24 = CTFontCreateWithName(CFSTR("Noteworthy"), 24, NULL);
-	NSDictionary *normalAttributes = [NSDictionary dictionaryWithObject:(__bridge id)noteworthy24 forKey:(id)kCTFontAttributeName];
-	CFRelease(noteworthy24);
-	
-	return [[NSAttributedString alloc] initWithString:loremIpsum attributes:normalAttributes];
+	BPXLTextViewController *controller = [BPXLTextViewController new];
+	controller.text = text;
+	return controller;
 }
 
 - (void)viewDidLoad
@@ -45,14 +45,40 @@
 	[super viewDidLoad];
 	
 	// Swap out the text view class to try out different behaviors
+#if READINGCONTENT
 	self.textView = [[BPXLTextViewReadingContent alloc] initWithFrame:self.view.bounds];
-	self.textView.attributedString = [self loremIpsum];
+	((BPXLTextViewReadingContent *)self.textView).causesPageTurn = !self.isLastPage;
+#else
+	self.textView = [[BPXLTextViewContainer alloc] initWithFrame:self.view.bounds];
+#endif
+	self.textView.attributedString = self.text;
 	[self.view addSubview:self.textView];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
 {
 	return YES;
+}
+
+- (void)setIsLastPage:(bool)isLastPage
+{
+	_isLastPage = isLastPage;
+#if READINGCONTENT
+	if (self.textView)
+		((BPXLTextViewReadingContent *)self.textView).causesPageTurn = !self.isLastPage;
+#endif
+}
+
+#pragma mark - Text
+
+- (void)setText:(NSAttributedString *)text
+{
+	if (text != _text)
+	{
+		_text = text;
+		if (self.textView)
+			[self.textView setAttributedString:text];
+	}
 }
 
 @end

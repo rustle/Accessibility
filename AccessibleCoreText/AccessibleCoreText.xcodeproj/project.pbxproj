@@ -15,6 +15,7 @@
 		911A2BD8151BE71300DAC360 /* BPXLAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 911A2BD7151BE71300DAC360 /* BPXLAppDelegate.m */; };
 		911A2BE0151BE72F00DAC360 /* BPXLTextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 911A2BDF151BE72F00DAC360 /* BPXLTextViewController.m */; };
 		911A2BE2151BE78C00DAC360 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 911A2BE1151BE78C00DAC360 /* CoreText.framework */; };
+		9148ED93162641DA001644FE /* BPXLRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9148ED92162641DA001644FE /* BPXLRootViewController.m */; };
 		919C42191597AE15005B89B4 /* BPXLTextViewContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 919C42181597AE15005B89B4 /* BPXLTextViewContainer.m */; };
 		919C421D1597AFE4005B89B4 /* BPXLTextViewReadingContent.m in Sources */ = {isa = PBXBuildFile; fileRef = 919C421C1597AFE4005B89B4 /* BPXLTextViewReadingContent.m */; };
 		919C42201597B0D8005B89B4 /* BPXLTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 919C421F1597B0D8005B89B4 /* BPXLTextView.m */; };
@@ -34,14 +35,15 @@
 		911A2BDE151BE72F00DAC360 /* BPXLTextViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPXLTextViewController.h; sourceTree = "<group>"; };
 		911A2BDF151BE72F00DAC360 /* BPXLTextViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPXLTextViewController.m; sourceTree = "<group>"; };
 		911A2BE1151BE78C00DAC360 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		9148ED91162641DA001644FE /* BPXLRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPXLRootViewController.h; sourceTree = "<group>"; };
+		9148ED92162641DA001644FE /* BPXLRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPXLRootViewController.m; sourceTree = "<group>"; };
 		919C42171597AE15005B89B4 /* BPXLTextViewContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPXLTextViewContainer.h; sourceTree = "<group>"; };
 		919C42181597AE15005B89B4 /* BPXLTextViewContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPXLTextViewContainer.m; sourceTree = "<group>"; };
 		919C421B1597AFE4005B89B4 /* BPXLTextViewReadingContent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPXLTextViewReadingContent.h; sourceTree = "<group>"; };
 		919C421C1597AFE4005B89B4 /* BPXLTextViewReadingContent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPXLTextViewReadingContent.m; sourceTree = "<group>"; };
 		919C421E1597B0D8005B89B4 /* BPXLTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPXLTextView.h; sourceTree = "<group>"; };
 		919C421F1597B0D8005B89B4 /* BPXLTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPXLTextView.m; sourceTree = "<group>"; };
-		919C42211597B0F6005B89B4 /* BPXLTextView+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BPXLTextView+Private.h"; sourceTree = "<group>"; };
-		919C42241597BE8B005B89B4 /* BPXLTextViewContainer+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BPXLTextViewContainer+Private.h"; sourceTree = "<group>"; };
+		919C42211597B0F6005B89B4 /* BPXLTextView_Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPXLTextView_Internal.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,16 +94,15 @@
 			children = (
 				911A2BD6151BE71300DAC360 /* BPXLAppDelegate.h */,
 				911A2BD7151BE71300DAC360 /* BPXLAppDelegate.m */,
+				9148ED91162641DA001644FE /* BPXLRootViewController.h */,
+				9148ED92162641DA001644FE /* BPXLRootViewController.m */,
 				911A2BDE151BE72F00DAC360 /* BPXLTextViewController.h */,
 				911A2BDF151BE72F00DAC360 /* BPXLTextViewController.m */,
 				919C421E1597B0D8005B89B4 /* BPXLTextView.h */,
 				919C421F1597B0D8005B89B4 /* BPXLTextView.m */,
-				919C42211597B0F6005B89B4 /* BPXLTextView+Private.h */,
-				919C42171597AE15005B89B4 /* BPXLTextViewContainer.h */,
-				919C42181597AE15005B89B4 /* BPXLTextViewContainer.m */,
-				919C42241597BE8B005B89B4 /* BPXLTextViewContainer+Private.h */,
-				919C421B1597AFE4005B89B4 /* BPXLTextViewReadingContent.h */,
-				919C421C1597AFE4005B89B4 /* BPXLTextViewReadingContent.m */,
+				919C42211597B0F6005B89B4 /* BPXLTextView_Internal.h */,
+				9148ED8F16263C49001644FE /* UIAccessilibilityContainer */,
+				9148ED9016263C55001644FE /* UIAccessibilityReadingContent */,
 				911A2BCE151BE71300DAC360 /* Supporting Files */,
 			);
 			path = AccessibleCoreText;
@@ -116,6 +117,24 @@
 				911A2BD5151BE71300DAC360 /* AccessibleCoreText-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		9148ED8F16263C49001644FE /* UIAccessilibilityContainer */ = {
+			isa = PBXGroup;
+			children = (
+				919C42171597AE15005B89B4 /* BPXLTextViewContainer.h */,
+				919C42181597AE15005B89B4 /* BPXLTextViewContainer.m */,
+			);
+			name = UIAccessilibilityContainer;
+			sourceTree = "<group>";
+		};
+		9148ED9016263C55001644FE /* UIAccessibilityReadingContent */ = {
+			isa = PBXGroup;
+			children = (
+				919C421B1597AFE4005B89B4 /* BPXLTextViewReadingContent.h */,
+				919C421C1597AFE4005B89B4 /* BPXLTextViewReadingContent.m */,
+			);
+			name = UIAccessibilityReadingContent;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -186,6 +205,7 @@
 				919C42191597AE15005B89B4 /* BPXLTextViewContainer.m in Sources */,
 				919C421D1597AFE4005B89B4 /* BPXLTextViewReadingContent.m in Sources */,
 				919C42201597B0D8005B89B4 /* BPXLTextView.m in Sources */,
+				9148ED93162641DA001644FE /* BPXLRootViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

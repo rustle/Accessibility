@@ -22,4 +22,9 @@
 
 @interface BPXLTextViewController : UIViewController
 
++ (instancetype)newWithText:(NSAttributedString *)string;
+
+@property (nonatomic) NSAttributedString *text;
+@property (nonatomic) bool isLastPage;
+
 @end

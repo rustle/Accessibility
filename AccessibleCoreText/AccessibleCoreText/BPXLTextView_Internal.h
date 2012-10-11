@@ -1,5 +1,5 @@
 //
-//  BPXLTextViewContainer+Private.h
+//  BPXLTextView_Internal.h
 //  AccessibleCoreText
 //
 //  Created by Doug Russell on 3/22/12.
@@ -18,10 +18,11 @@
 //  limitations under the License.
 //
 
-#import "BPXLTextViewContainer.h"
-
-@interface BPXLTextViewContainer ()
-@property (nonatomic) NSMutableArray *accessibilityElements;
-- (void)resetAccessibilityElements;
-- (void)configureAccessibilityElements;
+@interface BPXLTextView ()
+@property (nonatomic) UIBezierPath *path;
+- (void)configurePath;
+@property (nonatomic) __attribute__((NSObject)) CTFrameRef frameRef;
+- (void)makeFrameWithAttributeString:(NSAttributedString *)attributedString path:(CGPathRef)path;
+- (void)drawTextWithFramesetter:(NSAttributedString *)attributedString path:(CGPathRef)path context:(CGContextRef)context;
+- (void)reset;
 @end

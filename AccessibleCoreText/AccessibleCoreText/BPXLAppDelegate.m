@@ -19,15 +19,14 @@
 //  
 
 #import "BPXLAppDelegate.h"
-#import "BPXLTextViewController.h"
+#import "BPXLRootViewController.h"
 
 @implementation BPXLAppDelegate
-@synthesize window=_window;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-	self.window.rootViewController = [BPXLTextViewController new];
+	self.window.rootViewController = [BPXLRootViewController new];
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;

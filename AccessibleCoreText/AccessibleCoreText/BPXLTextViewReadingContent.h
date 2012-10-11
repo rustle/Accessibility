@@ -21,6 +21,8 @@
 #import <UIKit/UIKit.h>
 #import "BPXLTextViewContainer.h"
 
-@interface BPXLTextViewReadingContent : BPXLTextViewContainer
+@interface BPXLTextViewReadingContent : BPXLTextView <UIAccessibilityReadingContent>
+
+@property (nonatomic) bool causesPageTurn;
 
 @end

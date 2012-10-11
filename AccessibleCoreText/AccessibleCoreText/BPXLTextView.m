@@ -19,7 +19,7 @@
 //  
 
 #import "BPXLTextView.h"
-#import "BPXLTextView+Private.h"
+#import "BPXLTextView_Internal.h"
 
 @interface BPXLTextView ()
 
@@ -29,26 +29,12 @@
 
 #pragma mark - Setup / Cleanup
 
-static UIColor *whitish = nil;
-static UIColor *bluish = nil;
-+ (void)initialize
-{
-	static dispatch_once_t onceToken;
-	dispatch_once(&onceToken, ^{
-		whitish = [UIColor colorWithWhite:0.0f alpha:1.0f];
-		bluish = [UIColor colorWithRed:0.0f green:0.0f blue:1.0f alpha:0.5f];
-	});
-}
-
 static void CommonInit(BPXLTextView *self)
 {
 	// Initialization code
 	self.backgroundColor = [UIColor whiteColor];
 	self.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 	self.textInset = CGPointMake(10.0f, 10.0f);
-	self.pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(pan:)];
-	[self addGestureRecognizer:self.pan];
-	self.circleCenter = CGPointMake(100.0f, 100.0f);
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -82,7 +68,6 @@ static void CommonInit(BPXLTextView *self)
 {
 	self.frameRef = NULL;
 	self.path = nil;
-	self.circlePath = nil;
 	[self setNeedsDisplay];
 }
 
@@ -121,20 +106,6 @@ static void CommonInit(BPXLTextView *self)
 		UIBezierPath *path = [UIBezierPath bezierPathWithRect:rect];
 		self.path = path;
 	}
-	if (self.circlePath == nil)
-	{
-		CGRect rect = CGRectInset(self.bounds, self.textInset.x, self.textInset.y);
-		CGPoint origin = self.circleCenter;
-		origin.x -= 100.0f;
-		origin.y -= 100.0f;
-		CGRect circleRect = (CGRect){ origin, (CGSize){ 200.0f, 200.0f } };
-		CGAffineTransform transform = CGAffineTransformIdentity;
-		transform = CGAffineTransformTranslate( transform, 0, rect.size.height + (2 * self.textInset.x) );
-		transform = CGAffineTransformScale(transform, 1.0, -1.0);
-		circleRect = CGRectApplyAffineTransform(circleRect, transform);
-		self.circlePath = [UIBezierPath bezierPathWithOvalInRect:circleRect];
-		[self.path appendPath:[self circlePath]];
-	}
 }
 
 - (void)setAttributedString:(NSAttributedString *)attributedString
@@ -157,36 +128,33 @@ static void CommonInit(BPXLTextView *self)
 	
 	// Draw Text
 	CGContextSaveGState(context);
-	CGContextSetStrokeColorWithColor(context, whitish.CGColor);
+	CGContextSetStrokeColorWithColor(context, [UIColor whiteColor].CGColor);
 	CGContextSetTextMatrix(context, CGAffineTransformIdentity);
 	CGContextTranslateCTM(context, 0, rect.size.height);
 	CGContextScaleCTM(context, 1.0, -1.0);
 	CGContextAddPath(context, self.path.CGPath);
 	CGContextStrokePath(context);
-	[self drawTextWithFramesetter:self.attributedString rect:rect path:self.path.CGPath context:context];
-	CGContextRestoreGState(context);
-	
-	// Draw a circle
-	CGContextSaveGState(context);
-	CGContextTranslateCTM(context, 0, rect.size.height);
-	CGContextScaleCTM(context, 1.0, -1.0);
-	CGContextSetFillColorWithColor(context, bluish.CGColor);
-	UIBezierPath *circlePath = [self circlePath];
-	CGContextAddPath(context, circlePath.CGPath);
-	CGContextFillPath(context);
+	[self drawTextWithFramesetter:self.attributedString path:self.path.CGPath context:context];
 	CGContextRestoreGState(context);
 }
 
-- (void)drawTextWithFramesetter:(NSAttributedString *)attributedString rect:(CGRect)rect path:(CGPathRef)path context:(CGContextRef)context
+- (void)makeFrameWithAttributeString:(NSAttributedString *)attributedString path:(CGPathRef)path
 {
-	// Draw our text inside a frame
 	CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString((__bridge CFAttributedStringRef)attributedString);
 	CFRange range = CFRangeMake(0, 0);
 	CTFrameRef frameRef = CTFramesetterCreateFrame(framesetter, range, path, NULL);
 	self.frameRef = frameRef;
 	CFRelease(frameRef);
-	CTFrameDraw(self.frameRef, context);
 	CFRelease(framesetter);
+}
+
+- (void)drawTextWithFramesetter:(NSAttributedString *)attributedString path:(CGPathRef)path context:(CGContextRef)context
+{
+	if (attributedString == nil)
+		return;
+	// Draw our text inside a frame
+	[self makeFrameWithAttributeString:attributedString path:path];
+	CTFrameDraw(self.frameRef, context);
 }
 
 #pragma mark - Layout
@@ -195,16 +163,6 @@ static void CommonInit(BPXLTextView *self)
 {
 	[super layoutSubviews];
 	[self reset];
-}
-
-#pragma mark - 
-
-- (void)pan:(UIPanGestureRecognizer *)pan
-{
-	self.path = nil;
-	self.circlePath = nil;
-	self.circleCenter = [pan locationInView:pan.view];
-	[self setNeedsDisplay];
 }
 
 @end
