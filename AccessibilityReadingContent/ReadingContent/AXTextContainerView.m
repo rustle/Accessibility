@@ -1,10 +1,10 @@
 //
-//  BPXLTextViewContainer.m
-//  AccessibleCoreText
+//  AXTextContainerView.m
+//  ReadingContent
 //
-//  Created by Doug Russell on 3/22/12.
-//  Copyright (c) 2012 Black Pixel. All rights reserved.
-//	
+//  Created by Doug Russell on 9/12/13.
+//  Copyright (c) 2013 Doug Russell. All rights reserved.
+//  
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.
 //  You may obtain a copy of the License at
@@ -18,72 +18,59 @@
 //  limitations under the License.
 //
 
-#import "BPXLTextViewContainer.h"
-#import "BPXLTextView_Internal.h"
+#import "AXTextContainerView.h"
+#import "AXTextView_Internal.h"
 
-@interface BPXLTextViewContainer ()
-@property (nonatomic) NSMutableArray *accessibilityElements;
-- (void)resetAccessibilityElements;
-- (void)configureAccessibilityElements;
+@interface AXTextContainerView ()
+@property (nonatomic) NSMutableArray *axTextElements;
 @end
 
-@implementation BPXLTextViewContainer
+@implementation AXTextContainerView
 
 #pragma mark - Reset
 
 - (void)reset
 {
-	[self resetAccessibilityElements];
-	[super reset];
-}
-
-#pragma mark - Attributed String
-
-- (void)setAttributedString:(NSAttributedString *)attributedString
-{
-	[self resetAccessibilityElements];
-	[super setAttributedString:attributedString];
-}
-
-#pragma mark - Drawing
-
-- (void)drawRect:(CGRect)rect
-{
-	[self resetAccessibilityElements];
-	[super drawRect:rect];
+	[self ax_resetAccessibilityElements];
+	[super ax_reset];
 }
 
 #pragma mark - Accessibility Elements
 
-- (void)resetAccessibilityElements
+- (void)ax_resetAccessibilityElements
 {
-	self.accessibilityElements = nil;
+	self.axTextElements = nil;
 }
 
-- (void)configureAccessibilityElements
+- (void)ax_configureAccessibilityElements
 {
-	if (self.accessibilityElements == nil)
+	if (!self.axTextElements)
 	{
 		// If we don't have a frame ref, we don't have any lines
 		if (self.frameRef == NULL)
-			[self makeFrameWithAttributeString:self.attributedString path:self.path.CGPath];
+		{
+			return;
+		}
 		UIWindow *window = self.window;
 		if (window == nil)
-			return;
-		self.accessibilityElements = [NSMutableArray new];
+		{
+			
+		}
+		self.axTextElements = [NSMutableArray new];
 		CGRect rect = self.bounds;
 		// Get the lines out of the current frame and the lines origins
 		CFArrayRef lines = CTFrameGetLines(self.frameRef);
 		CFIndex count = CFArrayGetCount(lines);
 		CGPoint *origins = malloc(sizeof(CGPoint) * count);
 		CTFrameGetLineOrigins(self.frameRef, CFRangeMake(0, count), origins);
+		UIEdgeInsets textInsets = self.textInsets;
 		for (CFIndex i = 0; i < count; i++)
 		{
 			CTLineRef line = CFArrayGetValueAtIndex(lines, i);
 			// Get the lines substring
 			CFRange cfRange = CTLineGetStringRange(line);
 			NSRange range = NSMakeRange(cfRange.location, cfRange.length);
-			NSString *string = [self.attributedString.string substringWithRange:range];
+			NSString *string = [self.attributedText.string substringWithRange:range];
 			// Get the lines geometry
 			CGFloat ascent, descent, leading;
 			double width = CTLineGetTypographicBounds(line, &ascent, &descent, &leading);
@@ -95,7 +82,8 @@
 			}
 			// Adjust the lines origin for top left origin instead of bottotm left origin
 			CGPoint adjustedOrigin = origins[i];
-			adjustedOrigin.y = rect.size.height - adjustedOrigin.y - height;
+			adjustedOrigin.y = rect.size.height - adjustedOrigin.y - height - textInsets.top;
+			adjustedOrigin.x += textInsets.left;
 			CGRect frame = (CGRect){ adjustedOrigin, (CGSize) { (CGFloat)width, height} };
 			frame = [self convertRect:frame toView:window];
 			frame = [window convertRect:frame toWindow:nil];
@@ -106,7 +94,7 @@
 			accElement.accessibilityFrame = frame;
 			// Traits is a bitmask so don't for get to | in the default traits
 			accElement.accessibilityTraits = accElement.accessibilityTraits | UIAccessibilityTraitStaticText;
-			[self.accessibilityElements addObject:accElement];
+			[self.axTextElements addObject:accElement];
 		}
 		free(origins);
 	}
@@ -129,10 +117,10 @@
 /*
  Returns the number of accessibility elements in the container.
  */
-- (NSUInteger)accessibilityElementCount
+- (NSInteger)accessibilityElementCount
 {
-	[self configureAccessibilityElements];
-	return self.accessibilityElements.count;
+	[self ax_configureAccessibilityElements];
+	return (NSInteger)[self.axTextElements count];
 }
 
 /*
@@ -141,8 +129,8 @@
  */
 - (id)accessibilityElementAtIndex:(NSInteger)index
 {
-	[self configureAccessibilityElements];
-	return [self.accessibilityElements objectAtIndex:index];
+	[self ax_configureAccessibilityElements];
+	return [self.axTextElements objectAtIndex:index];
 }
 
 /*
@@ -151,8 +139,8 @@
  */
 - (NSInteger)indexOfAccessibilityElement:(id)element
 {
-	[self configureAccessibilityElements];
-	return [self.accessibilityElements indexOfObject:element];
+	[self ax_configureAccessibilityElements];
+	return [self.axTextElements indexOfObject:element];
 }
 
 @end

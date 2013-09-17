@@ -1,10 +1,10 @@
 //
-//  BPXLTextViewReadingContent.m
-//  AccessibleCoreText
+//  AXTextReadingContentView.m
+//  ReadingContent
 //
-//  Created by Doug Russell on 3/22/12.
-//  Copyright (c) 2012 Black Pixel. All rights reserved.
-//	
+//  Created by Doug Russell on 9/12/13.
+//  Copyright (c) 2013 Doug Russell. All rights reserved.
+//  
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.
 //  You may obtain a copy of the License at
@@ -18,64 +18,54 @@
 //  limitations under the License.
 //
 
-#import "BPXLTextViewReadingContent.h"
-#import "BPXLTextView_Internal.h"
+#import "AXTextReadingContentView.h"
+#import "AXTextView_Internal.h"
 
-@interface BPXLTextViewReadingContent ()
-@property (nonatomic) NSMutableArray *accessibilityElements;
-- (void)resetAccessibilityElements;
-- (void)configureAccessibilityElements;
+@interface AXTextReadingContentView ()
+@property (nonatomic) NSMutableArray *axTextElements;
 @end
 
-@implementation BPXLTextViewReadingContent
+@implementation AXTextReadingContentView
 
 #pragma mark - Reset
 
 - (void)reset
 {
-	[self resetAccessibilityElements];
-	[super reset];
-}
-
-#pragma mark - Drawing
-
-- (void)drawRect:(CGRect)rect
-{
-	[self resetAccessibilityElements];
-	[super drawRect:rect];
+	[self ax_resetAccessibilityElements];
+	[super ax_reset];
 }
 
 #pragma mark - Accessibility Elements
 
-- (void)resetAccessibilityElements
+- (void)ax_resetAccessibilityElements
 {
-	self.accessibilityElements = nil;
+	self.axTextElements = nil;
 }
 
-- (void)configureAccessibilityElements
+- (void)ax_configureAccessibilityElements
 {
-	if (self.accessibilityElements == nil)
+	if (!self.axTextElements)
 	{
 		// If we don't have a frame ref, we don't have any lines
 		if (self.frameRef == NULL)
-			[self makeFrameWithAttributeString:self.attributedString path:self.path.CGPath];
-		UIWindow *window = self.window;
-		if (window == nil)
+		{
 			return;
-		self.accessibilityElements = [NSMutableArray new];
+		}
+		self.axTextElements = [NSMutableArray new];
 		CGRect rect = self.bounds;
 		// Get the lines out of the current frame and the lines origins
 		CFArrayRef lines = CTFrameGetLines(self.frameRef);
 		CFIndex count = CFArrayGetCount(lines);
 		CGPoint *origins = malloc(sizeof(CGPoint) * count);
 		CTFrameGetLineOrigins(self.frameRef, CFRangeMake(0, count), origins);
+		UIEdgeInsets textInsets = self.textInsets;
 		for (CFIndex i = 0; i < count; i++)
 		{
 			CTLineRef line = CFArrayGetValueAtIndex(lines, i);
 			// Get the lines substring
 			CFRange cfRange = CTLineGetStringRange(line);
 			NSRange range = NSMakeRange(cfRange.location, cfRange.length);
-			NSString *string = [self.attributedString.string substringWithRange:range];
+			NSString *string = [self.attributedText.string substringWithRange:range];
 			// Get the lines geometry
 			CGFloat ascent, descent, leading;
 			double width = CTLineGetTypographicBounds(line, &ascent, &descent, &leading);
@@ -87,7 +77,8 @@
 			}
 			// Adjust the lines origin for top left origin instead of bottotm left origin
 			CGPoint adjustedOrigin = origins[i];
-			adjustedOrigin.y = rect.size.height - adjustedOrigin.y - height;
+			adjustedOrigin.y = rect.size.height - adjustedOrigin.y - height - textInsets.top;
+			adjustedOrigin.x += textInsets.left;
 			CGRect frame = (CGRect){ adjustedOrigin, (CGSize) { (CGFloat)width, height} };
 			// Build accessibility element
 			UIAccessibilityElement *accElement = [[UIAccessibilityElement alloc] initWithAccessibilityContainer:self];
@@ -96,7 +87,7 @@
 			accElement.accessibilityFrame = frame;
 			// Traits is a bitmask so don't for get to | in the default traits
 			accElement.accessibilityTraits = accElement.accessibilityTraits | UIAccessibilityTraitStaticText;
-			[self.accessibilityElements addObject:accElement];
+			[self.axTextElements addObject:accElement];
 		}
 		free(origins);
 	}
@@ -111,19 +102,22 @@
 
 - (UIAccessibilityTraits)accessibilityTraits
 {
+	UIAccessibilityTraits traits = [super accessibilityTraits];
 	if (self.causesPageTurn)
-		return [super accessibilityTraits] | UIAccessibilityTraitCausesPageTurn;
-	return [super accessibilityTraits];
+	{
+		traits |= UIAccessibilityTraitCausesPageTurn;
+	}
+	return traits;
 }
 
 // Returns the line number given a point in the view's coordinate space.
 - (NSInteger)accessibilityLineNumberForPoint:(CGPoint)point
 {
-	[self configureAccessibilityElements];
-	for (int i = 0; i < self.accessibilityElements.count; i++)
+	[self ax_configureAccessibilityElements];
+	for (NSUInteger i = 0; i < [self.axTextElements count]; i++)
 	{
-		UIAccessibilityElement *accElement = [self.accessibilityElements objectAtIndex:i];
-		if (CGRectContainsPoint(accElement.accessibilityFrame, point))
+		UIAccessibilityElement *axElement = self.axTextElements[i];
+		if (CGRectContainsPoint(axElement.accessibilityFrame, point))
 		{
 			return i;
 		}
@@ -134,27 +128,29 @@
 // Returns the content associated with a line number as a string.
 - (NSString *)accessibilityContentForLineNumber:(NSInteger)lineNumber
 {
-	[self configureAccessibilityElements];
-	return [[self.accessibilityElements objectAtIndex:lineNumber] accessibilityLabel];
+	[self ax_configureAccessibilityElements];
+	return [self.axTextElements[lineNumber] accessibilityLabel];
 }
 
 // Returns the on-screen rectangle for a line number.
 - (CGRect)accessibilityFrameForLineNumber:(NSInteger)lineNumber
 {
-	[self configureAccessibilityElements];
-	CGRect frame = [[self.accessibilityElements objectAtIndex:lineNumber] accessibilityFrame];
+	[self ax_configureAccessibilityElements];
+	CGRect frame = [self.axTextElements[lineNumber] accessibilityFrame];
 	UIWindow *window = self.window;
 	frame = [self convertRect:frame toView:window];
 	if (window)
+	{
 		frame = [window convertRect:frame toWindow:nil];
+	}
 	return frame;
 }
 
 // Returns a string representing the text displayed on the current page.
 - (NSString *)accessibilityPageContent
 {
-	[self configureAccessibilityElements];
-	return self.attributedString.string;
+	[self ax_configureAccessibilityElements];
+	return self.attributedText.string;
 }
 
 @end

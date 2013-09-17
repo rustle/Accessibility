@@ -1,10 +1,10 @@
 //
-//  BPXLTextView_Internal.h
-//  AccessibleCoreText
+//  AXPagedViewController.h
+//  ReadingContent
 //
-//  Created by Doug Russell on 3/22/12.
-//  Copyright (c) 2012 Black Pixel. All rights reserved.
-//	
+//  Created by Doug Russell on 9/12/13.
+//  Copyright (c) 2013 Doug Russell. All rights reserved.
+//  
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.
 //  You may obtain a copy of the License at
@@ -18,11 +18,8 @@
 //  limitations under the License.
 //
 
-@interface BPXLTextView ()
-@property (nonatomic) UIBezierPath *path;
-- (void)configurePath;
-@property (nonatomic) __attribute__((NSObject)) CTFrameRef frameRef;
-- (void)makeFrameWithAttributeString:(NSAttributedString *)attributedString path:(CGPathRef)path;
-- (void)drawTextWithFramesetter:(NSAttributedString *)attributedString path:(CGPathRef)path context:(CGContextRef)context;
-- (void)reset;
+#import <UIKit/UIKit.h>
+
+@interface AXPagedViewController : UIViewController 
+
 @end
